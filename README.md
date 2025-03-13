@@ -22,11 +22,11 @@ git clone https://github.com/xMattC/web-scraping-scripts.git
 cd web-scraping-scripts
 
 # Windows
-python -m venv venv
+python -m venv .env
 venv\Scripts\Activate
 
 # macOS/Linux
-python3 -m venv venv
+python3 -m venv .env
 source venv/bin/activate
 ```
 

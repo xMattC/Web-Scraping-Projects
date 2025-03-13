@@ -18,7 +18,7 @@ web-scraping-scripts/
 
 ### Clone the Repository
 ```bash
-git clone https://github.com/YOUR-USERNAME/web-scraping-scripts.git
+git clone https://github.com/xMattC/web-scraping-scripts.git
 cd web-scraping-scripts
 
 # Windows

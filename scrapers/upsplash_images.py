@@ -1,36 +1,25 @@
-import os
 from tools import extract_full_body_html
-from httpx import get
 from selectolax.parser import HTMLParser
 import logging
-import requests
+import os
+from httpx import get
+
+logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s")
 
 
-# logging.basicConfig(level=logging.DEBUG, format="%(asctime)s - %(levelname)s - %(message)s")
-
-
-#
-
-#
-#
-# def save_images(img_urls, dest_dir="images", tag=""):
-#     for url in img_urls:
-#         resp = get(url)
-#         # logging.info(f"Downloading {url}...")
-#
-#         file_name = url.split("/")[-1]
-#
-#         if not os.path.exists(dest_dir):
-#             os.makedirs(dest_dir)
-#
-#         with open(f"{dest_dir}/{tag}{file_name}.jpeg", "wb") as f:
-#             f.write(resp.content)
-#             # logging.info(f"Saved {file_name}, with size {round(len(resp.content) / 1024 / 1024, 2)} MB.")
-
-def get_img_tags_for(term=None):
-    if not term:
+def scrape_up_splash(terms: list[str]):
+    if not terms or len(terms) == 0:
         raise Exception("No search term provided")
 
+    for term in terms:
+        img_nodes = get_img_tags_for(term)
+        all_img_urls = [get_high_res_img_url(i) for i in img_nodes]
+        img_urls = [u for u in all_img_urls if u]
+
+        save_images(img_urls, term, term)
+
+
+def get_img_tags_for(term=None):
     url = f"https://unsplash.com/s/photos/{term}"
     html = extract_full_body_html(url)
 
@@ -56,12 +45,23 @@ def get_high_res_img_url(img_node):
     return url_res[0][0].split("?")[0]
 
 
+def save_images(img_urls, term, tag=""):
+    for url in img_urls:
+        resp = get(url)
+        logging.info(f"Downloading {url}...")
+
+        dest_dir = f'../outputs/up-splash/{term}'
+        file_name = url.split("/")[-1]
+
+        if not os.path.exists(dest_dir):
+            os.makedirs(dest_dir)
+
+        with open(f"{dest_dir}/{tag}-{file_name}.jpeg", "wb") as f:
+            f.write(resp.content)
+            logging.info(f"Saved {file_name}, with size {round(len(resp.content) / 1024 / 1024, 2)} MB.")
+
+
 if __name__ == '__main__':
-
-    img_nodes = get_img_tags_for('stars')
-    all_img_urls = [get_high_res_img_url(i) for i in img_nodes]
-    img_urls = [u for u in all_img_urls if u]
-
-    print(all_img_urls)
-    print(img_urls)
-    # save_images(img_urls[:3], dest_dir, search_tag)
+    scrape_up_splash(
+        ['lions', 'tigers', 'wolves', 'foxes', 'bears', 'rabbits', 'horses', 'elephants', 'giraffes', 'zebras']
+    )

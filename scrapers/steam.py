@@ -2,9 +2,38 @@ from playwright.sync_api import sync_playwright
 from selectolax.parser import HTMLParser
 import pandas as pd
 
-# Ensure Playwright is installed and Chromium is set up before running the script.
-URL = "https://store.steampowered.com/specials"  # Target webpage URL for scraping
-FILE_NAME = "steam_deals"  # Output filename
+
+def scrape_steam_specials():
+    """Scrapes the Steam Specials page for discounted games and saves the extracted data to a CSV file."""
+
+    url = "https://store.steampowered.com/specials"  # URL of the Steam Specials page
+
+    # CSS selector for identifying each game listing in the sale section
+    key_selector = 'div[class*="_2hhNOdcC6yLwL_rugP3YLf _37iggltdgh0RtNIECJCfOj Focusable"]'
+
+    # Extract the full HTML body of the webpage based on the key selector
+    html = extract_full_body_html(url, key_selector)
+
+    tree = HTMLParser(html)  # Parse the extracted HTML using Selectolax
+
+    data = []  # List to store extracted game details
+
+    # Select all sale item divs that match the key selector
+    divs = tree.css(key_selector)
+
+    # Iterate through each sale item div and extract relevant attributes
+    for div in divs:
+        attributes = extract_attributes(div)  # Extract attributes like game title, discount, price, etc.
+        data.append(attributes)  # Append extracted game details to the list
+
+    # Convert the extracted game data into a Pandas DataFrame
+    df = pd.DataFrame(data)
+
+    # Define the output file path and save the DataFrame as a CSV file
+    file_name = '../outputs/steam_deal.csv'
+    df.to_csv(file_name, index=False)
+
+    print(f"Scraped data saved to {file_name}")
 
 
 def extract_full_body_html(from_url, wait_for_key_selector=None):
@@ -22,11 +51,11 @@ def extract_full_body_html(from_url, wait_for_key_selector=None):
         # Launch a headless Chromium browser session (set headless=True for background execution)
         browser = p.chromium.launch(headless=False)
         page = browser.new_page()
-        page.goto(URL)
+        page.goto(from_url)
 
         # Wait for the page to fully load (DOM content, network requests, and other resources)
-        page.wait_for_load_state("domcontentloaded")  # Ensures initial DOM is ready
         page.wait_for_load_state("networkidle", timeout=1000000)  # Ensures no ongoing network requests
+        page.wait_for_load_state("domcontentloaded")  # Ensures initial DOM is ready
         page.wait_for_load_state("load")  # Ensures all assets are fully loaded
 
         # Scroll to the bottom of the page to load dynamically loaded content
@@ -50,6 +79,7 @@ def extract_attributes(css_div):
     Returns:
         dict: A dictionary containing extracted attributes of the game.
     """
+
     # Scrape game title
     title = css_div.css_first('div[class*="StoreSaleWidgetTitle"]').text()
 
@@ -94,32 +124,4 @@ def extract_attributes(css_div):
 
 
 if __name__ == "__main__":
-    """Main script execution: Scrapes Steam specials, extracts game details, and saves to CSV."""
-
-    # The main selector for identifying each game listing in the sale section
-    key_selector = 'div[class*="_2hhNOdcC6yLwL_rugP3YLf _37iggltdgh0RtNIECJCfOj Focusable"]'
-
-    # Extract the HTML content of the webpage
-    html = extract_full_body_html(URL, key_selector)
-
-    # Parse the extracted HTML using Selectolax
-    tree = HTMLParser(html)
-
-    # List to store extracted game data
-    data = []
-
-    # Select all sale item divs using CSS selectors
-    divs = tree.css(key_selector)
-
-    # Iterate through and extract game data: 
-    for div in divs:
-        attributes = extract_attributes(div)
-        data.append(attributes)
-
-    # Convert extracted data into a Pandas DataFrame
-    df = pd.DataFrame(data)
-
-    # Save the DataFrame to a CSV file in the "outputs" directory
-    df.to_csv(f'../outputs/{FILE_NAME}.csv', index=False)
-
-    print(f"Scraped data saved to '../outputs/{FILE_NAME}.csv'")
+    scrape_steam_specials()

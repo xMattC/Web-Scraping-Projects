@@ -1,4 +1,4 @@
-from playwright.sync_api import sync_playwright
+from tools import extract_full_body_html
 from selectolax.parser import HTMLParser
 import pandas as pd
 
@@ -36,38 +36,7 @@ def scrape_steam_specials():
     print(f"Scraped data saved to {file_name}")
 
 
-def extract_full_body_html(from_url, wait_for_key_selector=None):
-    """Launches a headless browser, navigates to the given URL, scrolls to load content,
-    and extracts the full HTML of the page body.
 
-    Args:
-        from_url (str): The webpage URL to scrape.
-        wait_for_key_selector (str, optional): CSS selector to wait for before extracting HTML.
-
-    Returns:
-        str: The full HTML content of the page body.
-    """
-    with sync_playwright() as p:
-        # Launch a headless Chromium browser session (set headless=True for background execution)
-        browser = p.chromium.launch(headless=False)
-        page = browser.new_page()
-        page.goto(from_url)
-
-        # Wait for the page to fully load (DOM content, network requests, and other resources)
-        page.wait_for_load_state("networkidle", timeout=1000000)  # Ensures no ongoing network requests
-        page.wait_for_load_state("domcontentloaded")  # Ensures initial DOM is ready
-        page.wait_for_load_state("load")  # Ensures all assets are fully loaded
-
-        # Scroll to the bottom of the page to load dynamically loaded content
-        page.evaluate("() => window.scroll(0, document.body.scrollHeight)")
-
-        # Wait for a specific element (game item container) to ensure content is present
-        if wait_for_key_selector:
-            page.wait_for_selector(wait_for_key_selector)
-
-        # Extract and return the full HTML content of the page body
-        html = page.inner_html("body")
-        return html
 
 
 def extract_attributes(css_div):

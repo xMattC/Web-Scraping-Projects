@@ -36,9 +36,6 @@ def scrape_steam_specials():
     print(f"Scraped data saved to {file_name}")
 
 
-
-
-
 def extract_attributes(css_div):
     """Extracts relevant game information from a parsed HTML element.
 

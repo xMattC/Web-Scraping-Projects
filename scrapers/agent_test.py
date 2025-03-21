@@ -1,7 +1,6 @@
 import requests
 
-# Target URL for testing
-URL = "https://store.steampowered.com/specials"
+URL = "https://store.steampowered.com/specials"  # Target URL for testing
 USER_AGENTS = [
     # List of common User-Agent strings to simulate different browsers and devices.
     # Source: https://techblog.willshouse.com/2012/01/03/most-common-user-agents/

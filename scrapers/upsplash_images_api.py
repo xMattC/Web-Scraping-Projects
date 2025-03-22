@@ -61,6 +61,7 @@ def get_all_image_urls(key_word: str, results: int) -> list[str]:
         img_urls.extend(page_img_urls)
         img_urls = list(dict.fromkeys(img_urls))  # Removes duplicates while keeping order
         page_number += 1  # Increment page number for the next batch of results
+        logging.info(f'Collected {len(img_urls)} image urls for "{key_word}" so far.')
 
     return img_urls[:results]  # Limit results to the requested amount
 
@@ -109,8 +110,9 @@ def download_images(img_urls: list[str], term: str, tag: str = ""):
         term (str): The search term used, which determines the subfolder name.
         tag (str, optional): An optional tag to be prefixed to file names. Defaults to an empty string.
     """
-    for url in img_urls:
+    for i, url in enumerate(img_urls):
         try:
+            logging.info(f"Downloading image {i} of {len(img_urls)}.")
             resp = get(url)
             resp.raise_for_status()  # Raise error if HTTP request fails
             logging.info(f"Downloading {url}...")
@@ -137,5 +139,4 @@ def download_images(img_urls: list[str], term: str, tag: str = ""):
 
 
 if __name__ == "__main__":
-    # Example usage: fetching images for 'cats' and 'dogs'. 15 images for each.
-    scrape_upsplash_using_api(['cats', 'dogs'], 15)
+    scrape_upsplash_using_api(["basset hounds"], 30)

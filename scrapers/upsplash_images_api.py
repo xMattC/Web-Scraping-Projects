@@ -7,7 +7,7 @@ from playwright.sync_api import sync_playwright
 logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s")
 
 
-def scrape_unsplash_using_api(terms: list[str], result=20):
+def scrape_upsplash_using_api(terms: list[str], result=20):
     """
     Scrapes Unsplash for images related to the given search terms and saves them.
 
@@ -138,4 +138,4 @@ def download_images(img_urls: list[str], term: str, tag: str = ""):
 
 if __name__ == "__main__":
     # Example usage: fetching images for 'cats' and 'dogs'. 15 images for each.
-    scrape_unsplash_using_api(['cats', 'dogs'], 15)
+    scrape_upsplash_using_api(['cats', 'dogs'], 15)

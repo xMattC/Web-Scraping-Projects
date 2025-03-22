@@ -9,7 +9,7 @@ from playwright.sync_api import sync_playwright
 logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s")
 
 
-def scrape_up_splash(terms: list[str]):
+def scrape_up_splash_using_api(terms: list[str], result=20):
     """ Scrapes Unsplash for images related to the given search terms and saves them.
     """
     if not terms or len(terms) == 0:
@@ -18,58 +18,49 @@ def scrape_up_splash(terms: list[str]):
     for i, term in enumerate(terms):
 
         if type(term) == str:
-
-            img_nodes = get_img_tags_for(term)  # Extract image nodes from Unsplash search results
-            all_img_urls = [get_high_res_img_url(i) for i in img_nodes]  # Extract high-resolution image URLs
-            img_urls = [u for u in all_img_urls if u]  # Filter out None values
-
-            save_images(img_urls, term, term)  # Download and save images
+            urls = (get_all_image_urls(term, result))
+            download_images(urls, term)
 
         else:
             logging.warning(f"Input list element {i} - ({term}) is not of type string. Ignoring element")
 
 
-def get_img_tags_for(term: str) -> list:
-    """ Fetches image elements from Unsplash search results.
-    """
-    url = f"https://unsplash.com/s/photos/{term}"
-    html = extract_full_body_html(url)
+def get_all_image_urls(key_word, results):
+    page_number = 0
+    img_urls = []
 
-    tree = HTMLParser(html)
-    imgs = tree.css('figure[data-testid*="photo-grid-masonry-figure"] a img')
+    while len(img_urls) < results:
+        data = get_response_for(key_word, page_number)
 
-    return imgs
+        page_img_urls = [x["urls"]["raw"] for x in data["results"] if x["premium"] is False]
+        page_img_urls = [x.split("?")[0] for x in page_img_urls]
 
+        img_urls.extend(page_img_urls)  # Efficiently appends multiple items
+        img_urls = list(dict.fromkeys(img_urls))
+        page_number += 1  # Increment page number
 
-def img_filter_out(url: str, keywords: list[str]) -> bool:
-    """ Checks if an image URL contains any unwanted keywords and filters it out.
-    """
-    return not any(x in url for x in keywords)
+    if len(img_urls) > results:
+        img_urls = img_urls[:results - len(img_urls)]
 
-
-def get_high_res_img_url(img_node) -> str | None:
-    """ Extracts the highest-resolution image URL from the srcset attribute.
-    """
-    src_set = img_node.attrs["srcset"]  # Get "srcset" attribute containing multiple image URLs
-    src_set_list = src_set.split(", ")  # Split into individual image entries
-
-    # Extract URL with the highest resolution, filtering out unwanted keywords
-    url_res = [src.split(" ") for src in src_set_list if img_filter_out(src, ['plus', 'profile', 'premium'])]
-
-    if not url_res:
-        return None  # Return None if no valid image URLs remain
-
-    return url_res[0][0].split("?")[0]  # Return the highest-resolution image URL
+    return img_urls
 
 
-def save_images(img_urls: list[str], term: str, tag: str = ""):
-    """ Downloads images from given URLs and saves them to a directory.
-    """
+def get_response_for(keyword: str, page_number=0):
+    with sync_playwright() as p:
+        url = f"https://unsplash.com/napi/search/photos?page={page_number}&per_page={30}&query={keyword}"
+        context = p.request.new_context()
+        resp = context.get(url)
+        return resp.json()
+
+
+def download_images(img_urls: list[str], term: str, tag: str = ""):
     for url in img_urls:
-        resp = get(url)  # Send GET request to download image
+
+        resp = get(url)
         logging.info(f"Downloading {url}...")
 
         dest_dir = f'../outputs/up-splash/{term}'  # Define output directory path
+
         file_name = url.split("/")[-1]  # Extract filename from URL
 
         if not os.path.exists(dest_dir):
@@ -80,53 +71,9 @@ def save_images(img_urls: list[str], term: str, tag: str = ""):
             f.write(resp.content)
             logging.info(f"Saved {file_name}, with size {round(len(resp.content) / 1024 / 1024, 2)} MB.")
 
-
-def try_with_api_intercept(query: str, per_page='10'):
-    """
-    """
-    with sync_playwright() as p:
-        url = f"https://unsplash.com/napi/search/photos?page=1&per_page={per_page}&query={query}"
-
-        # resp = p.on(get(url))
-
-        # Launch a headless Chromium browser session (set headless=True for background execution)
-        browser = p.chromium.launch(headless=True)
-        page = browser.new_page()
-        page.goto(url)
-
-        context = p.request.new_context()
-        resp = context.get(url)
-        print(resp.json())
+    return
 
 
-    #     # Wait for the page to fully load (DOM content, network requests, and other resources)
-    #     page.wait_for_load_state("networkidle", timeout=1000000)  # Ensures no ongoing network requests
-    #     page.wait_for_load_state("domcontentloaded")  # Ensures initial DOM is ready
-    #     page.wait_for_load_state("load")  # Ensures all assets are fully loaded
-    #
-    #     # Scroll to the bottom of the page to load dynamically loaded content
-    #     page.evaluate("() => window.scroll(0, document.body.scrollHeight)")
-    #
-    #     # Wait for a specific element (game item container) to ensure content is present
-    #     if wait_for_key_selector:
-    #         page.wait_for_selector(wait_for_key_selector)
-    #
-    #     # Extract and return the full HTML content of the page body
-    #     html = page.inner_html("body")
-    #
-    #
-    # html = extract_full_body_html(url)
-    #
-    #
-    # if resp.status_code == 200:
-    #     return resp.json()
-
-
-if __name__ == '__main__':
-    # Run the scraper with a predefined list of search terms
-    # scrape_up_splash(
-    #     ['tigers', 'wolves', 'foxes', 'bears', 'rabbits']
-    # )
-
-    print(try_with_api_intercept("foxes", "20"))
-
+if __name__ == "__main__":
+    scrape_up_splash_using_api(['cats', 'dogs'], 15)
+#

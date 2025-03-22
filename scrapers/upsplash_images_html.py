@@ -3,7 +3,6 @@ from selectolax.parser import HTMLParser
 import logging
 import os
 from httpx import get
-from playwright.sync_api import sync_playwright
 
 # Configure logging settings
 logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s")
@@ -81,52 +80,8 @@ def save_images(img_urls: list[str], term: str, tag: str = ""):
             logging.info(f"Saved {file_name}, with size {round(len(resp.content) / 1024 / 1024, 2)} MB.")
 
 
-def try_with_api_intercept(query: str, per_page='10'):
-    """
-    """
-    with sync_playwright() as p:
-        url = f"https://unsplash.com/napi/search/photos?page=1&per_page={per_page}&query={query}"
-
-        # resp = p.on(get(url))
-
-        # Launch a headless Chromium browser session (set headless=True for background execution)
-        browser = p.chromium.launch(headless=True)
-        page = browser.new_page()
-        page.goto(url)
-
-        context = p.request.new_context()
-        resp = context.get(url)
-        print(resp.json())
-
-
-    #     # Wait for the page to fully load (DOM content, network requests, and other resources)
-    #     page.wait_for_load_state("networkidle", timeout=1000000)  # Ensures no ongoing network requests
-    #     page.wait_for_load_state("domcontentloaded")  # Ensures initial DOM is ready
-    #     page.wait_for_load_state("load")  # Ensures all assets are fully loaded
-    #
-    #     # Scroll to the bottom of the page to load dynamically loaded content
-    #     page.evaluate("() => window.scroll(0, document.body.scrollHeight)")
-    #
-    #     # Wait for a specific element (game item container) to ensure content is present
-    #     if wait_for_key_selector:
-    #         page.wait_for_selector(wait_for_key_selector)
-    #
-    #     # Extract and return the full HTML content of the page body
-    #     html = page.inner_html("body")
-    #
-    #
-    # html = extract_full_body_html(url)
-    #
-    #
-    # if resp.status_code == 200:
-    #     return resp.json()
-
-
 if __name__ == '__main__':
     # Run the scraper with a predefined list of search terms
-    # scrape_up_splash(
-    #     ['tigers', 'wolves', 'foxes', 'bears', 'rabbits']
-    # )
-
-    print(try_with_api_intercept("foxes", "20"))
-
+    scrape_up_splash(
+        ['tigers', 'wolves', 'foxes', 'bears', 'rabbits']
+    )

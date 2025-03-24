@@ -53,9 +53,10 @@ This will generate an output CSV file at:
 ## Output Format
 The script generates a CSV file with the following columns:
 
-| Title | Tags | Release Date | Review Score | Review Count | Original Price | currency |Sale Price | Discount |  Thumbnail URL |
-|--------|--------------|-------------|-------------|----------------|------------|-----------|------|--------------|
-| Game 1 | Action, RPG,  'Casual', 'Simulation', 'Automobile Sim' | YYYY-MM-DD   | Very Positive | 10,000 | 59.99 | £ |29.99 | -50% | Image URL |
+| Title  | Tags                                     | Release Date | Review Score  | Review Count | Original Price | Currency | Sale Price | Discount | Thumbnail URL |
+|--------|-----------------------------------------|-------------|--------------|--------------|---------------|----------|------------|----------|--------------|
+| Game 1 | Action, RPG, Casual, Simulation, Automobile Sim | YYYY-MM-DD  | Very Positive | 10,000       | 59.99         | £        | 29.99      | 50%      | Image URL    |
+
 
 ## Notes
 - If Steam changes its website structure, the CSS selectors may need updates (i.e. in config --> tools)

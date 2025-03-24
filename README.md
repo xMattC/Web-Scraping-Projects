@@ -19,19 +19,21 @@ This Python script scrapes discounted games from the Steam Specials page and sav
 
 ```plaintext
 web-scraping-scripts/
-├── scrapers/        # Contains individual scraper scripts
-├── outputs/         # Stores scraped data (CSV)
-├── README.md        # Documentation
-├── requirements.txt # Python dependencies
-└── .gitignore       # Files to ignore in version control
+├── config/         
+├── utilities/       
+├── README.md        
+├── requirements.txt 
+└── .gitignore       
 ```
 
 ## Installation & Setup
 
 ### Clone the Repository
 ```bash
-git clone https://github.com/xMattC/web-scraping-scripts.git
-cd web-scraping-scripts
+git clone https://github.com/xMattC/steam_offers_scraper
+
+.git
+cd steam_offers_scraper
 
 # Windows
 python -m venv .env
@@ -51,19 +53,14 @@ pip install -r requirements.txt
 Run the script using Python:
 
 ```bash
-python steam_specials_scraper.py
+python main.py
 ```
 
 This will generate an output CSV file at:
 
 ```
-../outputs/steam_deal.csv
+../outputs/steam_deals_(todays-date).csv
 ```
-
-## Code Explanation
-- `scrape_steam_specials()`: Scrapes the Steam Specials page and processes each game listing.
-- `extract_attributes(css_div)`: Extracts specific game details from the HTML structure.
-- `extract_full_body_html(url, key_selector)`: Extracts the full HTML content from the Steam Specials page (implemented in `tools.py`).
 
 ## Output Format
 The script generates a CSV file with the following columns:
@@ -73,8 +70,4 @@ The script generates a CSV file with the following columns:
 | Game 1 | YYYY-MM-DD   | Very Positive | 10,000 | $59.99 | $29.99 | -50% | Action, RPG | Image URL |
 
 ## Notes
-- The script relies on `extract_full_body_html` from `tools.py`, which should be implemented to fetch the relevant HTML content.
-- If Steam changes its website structure, the CSS selectors may need updates.
-
-## License
-This project is released under the MIT License.
+- If Steam changes its website structure, the CSS selectors may need updates (i.e. in config --> tools)

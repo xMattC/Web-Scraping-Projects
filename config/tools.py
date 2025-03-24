@@ -32,8 +32,8 @@ _config = {
             {
                 "name": "release_date",
                 "selector": 'div[class*="_1qvTFgmehUzbdYM9cw0eS7"]',
-                "match": "all",
-                "type": "node"
+                "match": "first",
+                "type": "text"
             },
             {
                 "name": "review_score",
@@ -48,26 +48,26 @@ _config = {
                 "type": "text"
             },
             {
-                "name": "currency",
-                "selector": 'div[class*=StoreSalePriceWidgetContainer] > div',
-                "match": "all",
-                "type": "text"
-            },
-            {
                 "name": "sale_price",
-                "selector": 'div[class*=StoreSalePriceWidgetContainer] > div',
+                "selector": 'div[class*=_3j4dI1yA7cRfCvK8h406OB]',
                 "match": "all",
                 "type": "text"
             },
+            # {
+            #     "name": "price_currency",
+            #     "selector": 'div[class*=_3j4dI1yA7cRfCvK8h406OB]',
+            #     "match": "all",
+            #     "type": "text"
+            # },
             {
                 "name": "orig_price",
-                "selector": 'div[class*=StoreSalePriceWidgetContainer] > div',
+                "selector": 'div[class*=_3fFFsvII7Y2KXNLDk_krOW]',
                 "match": "all",
                 "type": "text"
             },
             {
                 "name": "discount_pct",
-                "selector": 'div[class*=StoreSalePriceWidgetContainer] > div',
+                "selector": 'div[class*=cnkoFkzVCby40gJ0jGGS4]',
                 "match": "all",
                 "type": "text"
             },

@@ -55,7 +55,7 @@ The script generates a CSV file with the following columns:
 
 | Title  | Tags                                     | Release Date | Review Score  | Review Count | Original Price | Currency | Sale Price | Discount | Thumbnail URL |
 |--------|-----------------------------------------|-------------|--------------|--------------|---------------|----------|------------|----------|--------------|
-| Game 1 | Action, RPG, Casual, Simulation, Automobile Sim | YYYY-MM-DD  | Very Positive | 10,000       | 59.99         | £        | 29.99      | 50%      | Image URL    |
+| Game 1 | Action, RPG, Casual, Simulation, Automobile Sim | YYYY-MM-DD  | Very Positive | 10,000       | 59.99         | £        | 29.99      | 50%      | https://.....Image URL    |
 
 
 ## Notes

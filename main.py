@@ -23,7 +23,7 @@ def main():
         attrs = format_and_transform(attrs)
         game_data.append(attrs)
 
-    save_to_file("steam_specials.csv", game_data)
+    save_to_file("steam_specials", game_data)
 
 
 if __name__ == "__main__":

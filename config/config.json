@@ -14,12 +14,6 @@
             "type": "text"
         },
         {
-            "name": "thumbnail",
-            "selector": "img[class*=\"_2eQ4mkpf4IzUp1e9NnM2Wr\"]",
-            "match": "first",
-            "type": "node"
-        },
-        {
             "name": "tags",
             "selector": "div[class*=\"_2bkP-3b7dvr0a_qPdZEfHY\"] > a",
             "match": "all",
@@ -28,8 +22,8 @@
         {
             "name": "release_date",
             "selector": "div[class*=\"_1qvTFgmehUzbdYM9cw0eS7\"]",
-            "match": "all",
-            "type": "node"
+            "match": "first",
+            "type": "text"
         },
         {
             "name": "review_score",
@@ -44,22 +38,28 @@
             "type": "text"
         },
         {
-            "name": "price_sale",
-            "selector": "div[class*=StoreSalePriceWidgetContainer] > div > div",
+            "name": "sale_price",
+            "selector": "div[class*=_3j4dI1yA7cRfCvK8h406OB]",
             "match": "all",
             "type": "text"
         },
         {
-            "name": "price_orig",
-            "selector": "div[class*=StoreSalePriceWidgetContainer] > div > div",
+            "name": "orig_price",
+            "selector": "div[class*=_3fFFsvII7Y2KXNLDk_krOW]",
             "match": "all",
             "type": "text"
         },
         {
-            "name": "reduction_percent",
-            "selector": "div[class*=StoreSalePriceWidgetContainer] > div",
+            "name": "discount_pct",
+            "selector": "div[class*=cnkoFkzVCby40gJ0jGGS4]",
             "match": "all",
             "type": "text"
+        },
+        {
+            "name": "thumbnail",
+            "selector": "img[class*=\"_2eQ4mkpf4IzUp1e9NnM2Wr\"]",
+            "match": "first",
+            "type": "node"
         }
     ]
 }

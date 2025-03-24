@@ -18,12 +18,6 @@ _config = {
                 "type": "text"
             },
             {
-                "name": "thumbnail",
-                "selector": 'img[class*="_2eQ4mkpf4IzUp1e9NnM2Wr"]',
-                "match": "first",
-                "type": "node"
-            },
-            {
                 "name": "tags",
                 "selector": 'div[class*="_2bkP-3b7dvr0a_qPdZEfHY"] > a',
                 "match": "all",
@@ -53,12 +47,12 @@ _config = {
                 "match": "all",
                 "type": "text"
             },
-            # {
-            #     "name": "price_currency",
-            #     "selector": 'div[class*=_3j4dI1yA7cRfCvK8h406OB]',
-            #     "match": "all",
-            #     "type": "text"
-            # },
+            {
+                "name": "currency",
+                "selector": 'div[class*=_3j4dI1yA7cRfCvK8h406OB]',
+                "match": "all",
+                "type": "text"
+            },
             {
                 "name": "orig_price",
                 "selector": 'div[class*=_3fFFsvII7Y2KXNLDk_krOW]',
@@ -70,6 +64,12 @@ _config = {
                 "selector": 'div[class*=cnkoFkzVCby40gJ0jGGS4]',
                 "match": "all",
                 "type": "text"
+            },
+            {
+                "name": "thumbnail",
+                "selector": 'img[class*="_2eQ4mkpf4IzUp1e9NnM2Wr"]',
+                "match": "first",
+                "type": "node"
             },
         ]
 }

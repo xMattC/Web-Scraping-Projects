@@ -19,9 +19,7 @@ This Python script scrapes discounted games from the Steam Specials page and sav
 
 ### Clone the Repository
 ```bash
-git clone https://github.com/xMattC/steam_offers_scraper
-
-.git
+git clone https://github.com/xMattC/steam_offers_scraper.git
 cd steam_offers_scraper
 
 # Windows

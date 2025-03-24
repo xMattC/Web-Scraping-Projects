@@ -15,17 +15,6 @@ This Python script scrapes discounted games from the Steam Specials page and sav
   - Thumbnail image URL
 - Saves the extracted data in a structured CSV format
 
-## Folder Structure
-
-```plaintext
-web-scraping-scripts/
-├── config/         
-├── utilities/       
-├── README.md        
-├── requirements.txt 
-└── .gitignore       
-```
-
 ## Installation & Setup
 
 ### Clone the Repository

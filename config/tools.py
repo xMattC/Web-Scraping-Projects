@@ -30,40 +30,46 @@ _config = {
                 "type": "text"
             },
             {
-                "name": "release_data",
+                "name": "release_date",
                 "selector": 'div[class*="_1qvTFgmehUzbdYM9cw0eS7"]',
-                "match": "first",
-                "type": "text"
+                "match": "all",
+                "type": "node"
             },
             {
                 "name": "review_score",
                 "selector": 'a[class*="ReviewScore"] > div > div',
-                "match": "first",
-                "type": "all"
+                "match": "all",
+                "type": "text"
             },
             {
                 "name": "review_count",
                 "selector": 'a[class*="ReviewScore"] > div > div',
                 "match": "all",
-                "type": "node"
+                "type": "text"
             },
             {
-                "name": "price_sale",
-                "selector": 'div[class*=StoreSalePriceWidgetContainer] > div > div',
-                "match": "all",
-                "type": "node"
-            },
-            {
-                "name": "price_orig",
-                "selector": 'div[class*=StoreSalePriceWidgetContainer] > div > div',
-                "match": "all",
-                "type": "node"
-            },
-            {
-                "name": "reduction_percent",
+                "name": "currency",
                 "selector": 'div[class*=StoreSalePriceWidgetContainer] > div',
-                "match": "first",
-                "type": "node"
+                "match": "all",
+                "type": "text"
+            },
+            {
+                "name": "sale_price",
+                "selector": 'div[class*=StoreSalePriceWidgetContainer] > div',
+                "match": "all",
+                "type": "text"
+            },
+            {
+                "name": "orig_price",
+                "selector": 'div[class*=StoreSalePriceWidgetContainer] > div',
+                "match": "all",
+                "type": "text"
+            },
+            {
+                "name": "discount_pct",
+                "selector": 'div[class*=StoreSalePriceWidgetContainer] > div',
+                "match": "all",
+                "type": "text"
             },
         ]
 }

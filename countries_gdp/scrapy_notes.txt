@@ -1,0 +1,15 @@
+
+to create a new project:
+    scrapy startproject countries_gdp
+
+To generate a new spider:
+    scrapy genspider gdp wikipedia.org
+
+To simply run the code;
+    scrapy crawl gdp
+
+Run and export:
+    scrapy crawl gdp -o gdp.csv | gdp.json
+
+links:
+    Scrapy css selectors cheat sheet https://www.restack.io/p/scrapy-answer-css-selectors

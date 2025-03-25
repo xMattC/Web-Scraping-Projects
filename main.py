@@ -7,25 +7,20 @@ from utilities.post_process import format_and_transform, save_to_file
 
 
 def main():
-    """
-    Main function to extract game data from a webpage and save it to a file.
-
-    This function:
-    - Loads the configuration settings.
-    - Extracts the webpage's HTML.
-    - Parses relevant elements using CSS selectors.
-    - Extracts and processes the necessary data.
-    - Saves the extracted data to a CSV file.
-
-    Logs information and errors throughout the process.
+    """ Main function to extract game data from a webpage and save it to a file.
+        This function:
+            - Loads the configuration settings.
+            - Extracts the webpage's HTML.
+            - Parses relevant elements using CSS selectors.
+            - Extracts and processes the necessary data.
+            - Saves the extracted data to a CSV file.
     """
     try:
         # Load configuration settings (URL, selectors, etc.)
         config = get_config()
 
-        logging.info("Extracting HTML content from the page...")
-
         # Retrieve the full HTML content from the specified URL
+        logging.info("Extracting HTML content from the page...")
         html = extract_full_body_html(
             from_url=config.get('url'),
             wait_for_element=config.get('container', {}).get('selector')  # Wait for a specific element if provided
@@ -49,9 +44,8 @@ def main():
 
         logging.info(f"Found {len(divs)} elements. Extracting attributes...")
 
-        game_data = []
-
         # Iterate through each extracted element and process the data
+        game_data = []
         for d in divs:
             attrs = parse_raw_attributes(d, config.get('item'))  # Extract raw attributes from HTML elements
             attrs = format_and_transform(attrs)  # Apply transformations to format the data

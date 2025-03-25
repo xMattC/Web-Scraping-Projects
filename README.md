@@ -47,7 +47,7 @@ python main.py
 This will generate an output CSV file at:
 
 ```
-../outputs/steam_deals_(todays-date).csv
+../outputs/(todays-date)_steam_deals.csv
 ```
 
 ## Output Format

@@ -1,64 +1,67 @@
-from selectolax.parser import Node
+from selectolax.parser import Node, HTMLParser
 import logging
+from typing import Union
 
 
-def parse_raw_attributes(node: Node, selectors: list):
+def parse_raw_attributes(node: Union[Node, str], selectors: list[dict]):
     """
-    Parses raw attributes from an HTML node based on selector configurations.
+    Extracts attributes from an HTML node based on a list of selector configurations. If a html string is provided,
+    it will be converted into an HTMLParser object. In this code this will only be for the top level game container
+    i.e. "store_sales_divs". All other node instances should be of type Node and be a child/descendant of
+    "dict:store_sales_divs"
 
-    Args:
-        node (Node): A Selectolax Node object representing an HTML element.
-        selectors (list): A list of dictionaries specifying attributes to extract.
-            Each dictionary should have the following keys:
-                - "match" (str): Either "all" or "first", specifying whether to extract all matching elements or just the first one.
-                - "type" (str): The type of content to extract, either "text" (text content) or "node" (raw node).
-                - "selector" (str): The CSS selector used to locate elements within the node.
-                - "name" (str): The key under which extracted data will be stored.
-
-    Returns:
-        dict: A dictionary where keys are attribute names, and values are extracted content.
-              If an error occurs or a selector is invalid, the corresponding key will have a value of `None`.
-
-    Raises:
-        ValueError: If the `selectors` list contains improperly formatted dictionaries.
+    selectors (list[dict]): A list of dictionaries defining what attributes to extract
     """
+
+    if not issubclass(Node, type(node)):
+        node = HTMLParser(node)
+
     parsed = {}
 
     for s in selectors:
+        # Extract configuration values
         match = s.get("match")
         type_ = s.get("type")
         selector = s.get("selector")
         name = s.get("name")
 
+        # Validate selector configuration
         if not all([match, type_, selector, name]):
             logging.warning(f"Skipping invalid selector: {s}")
             continue  # Skip malformed selectors
 
         try:
             if match == "all":
-                matched = node.css(selector) or []
+                # Extract all matching elements
+                matched = node.css(selector)
 
                 if type_ == "text":
+                    # Extract text from each matched element
                     parsed[name] = [n.text() for n in matched if n is not None]
 
                 elif type_ == "node":
+                    # Store raw node objects
                     parsed[name] = matched
 
                 logging.info(f"Extracted {len(parsed[name])} items for '{name}'.")
 
             elif match == "first":
+                # Extract the first matching element
                 matched = node.css_first(selector)
 
                 if type_ == "text":
+                    # Extract text if element exists
                     parsed[name] = matched.text() if matched else ""
 
                 elif type_ == "node":
+                    # Store raw node or None if not found
                     parsed[name] = matched if matched else None
 
                 logging.info(f"Extracted '{parsed[name]}' for '{name}'.")
 
         except Exception as e:
-            logging.error(f"Error parsing {name}: {e}")
+            # Handle parsing errors
+            logging.error(f"Error parsing '{name}': {e}")
             parsed[name] = None  # Ensure the key exists even if an error occurs
 
     return parsed

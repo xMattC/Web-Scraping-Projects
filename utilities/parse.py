@@ -40,6 +40,7 @@ def parse_raw_attributes(node: Node, selectors: list):
 
                 if type_ == "text":
                     parsed[name] = [n.text() for n in matched if n is not None]
+
                 elif type_ == "node":
                     parsed[name] = matched
 
@@ -50,6 +51,7 @@ def parse_raw_attributes(node: Node, selectors: list):
 
                 if type_ == "text":
                     parsed[name] = matched.text() if matched else ""
+
                 elif type_ == "node":
                     parsed[name] = matched if matched else None
 

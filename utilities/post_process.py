@@ -11,7 +11,7 @@ def format_and_transform(attrs: Dict[str, Union[str, list, Node]]) -> Dict:
         "release_date": lambda date: reformat_date(date, '%b %d, %Y', '%Y-%m-%d'),
         "thumbnail": lambda n: get_attrs_from_node(n, "src"),
         "tags": lambda l: get_first_n(l, 5),
-        "review_score": lambda l: index(l, 0),
+        "review_score": lambda l: index(l, 0),  # indexing with function instead of inline to catch exceptions.
         "review_count": lambda l: int(''.join(regex(index(l, 1) or '', r'\d+')) or 0),
         "currency": lambda l: extract_currency(index(l, 0)),
         "orig_price": lambda l: extract_price(index(l, 0)),
@@ -47,7 +47,7 @@ def index(input_list: List, i: int = 0) -> Union[str, None]:
 
 
 def reformat_date(date_raw: str, input_format: str = '%b %d, %Y', output_format: str = '%Y-%m-%d') -> Union[str, None]:
-    """Reformats a date string from one format to another."""
+    """Reformat a date string from one format to another."""
     if not date_raw:
         return None
     try:
@@ -83,8 +83,8 @@ def extract_price(price_str: str) -> float:
     if not price_str:
         return 0.0
 
-    # Remove thousands separator (.) and replace decimal comma (,) with dot (.)
-    cleaned_price_str = price_str.replace('.', '').replace(',', '.')
+    # If in Euro format, replace decimal comma (,) with dot (.)
+    cleaned_price_str = price_str.replace(',', '.')
 
     # Extract numerical price
     match = re.search(r"\d+(\.\d+)?", cleaned_price_str)

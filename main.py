@@ -27,7 +27,8 @@ def main():
         logging.info("Extracting HTML content from the page...")
         html = extract_full_body_html(
             from_url=config.get('url'),
-            wait_for_element=config.get('container', {}).get('selector')  # Ensures page has loaded relevant content
+            # Ensures page has loaded the container holding all the game deals (12 per page).
+            wait_for_element=config.get('container').get('selector')
         )
 
         # Extract the main container that holds All 'store_sales_divs' css nodes and store as a dict containing game

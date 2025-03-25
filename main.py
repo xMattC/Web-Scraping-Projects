@@ -31,7 +31,7 @@ def main():
         )
 
         # Extract the main container that holds All 'store_sales_divs' css nodes and store as a dict containing game
-        # nodes  i.e. {'store_sales_divs': [<Node div>, <Node div>,...]}
+        # nodes  i.e. {'store_sales_divs': [<Node div>, <Node div>,...]} - 12 per page on for the steam specials
         container = parse_raw_attributes(html, [config.get('container')])
 
         # Iterate through all game container nodes an extract required information

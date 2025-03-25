@@ -13,6 +13,7 @@ def parse_raw_attributes(node: Union[Node, str], selectors: list[dict]):
     selectors (list[dict]): A list of dictionaries defining what attributes to extract
     """
 
+    # Convert to Node if top level container string html is provided
     if not issubclass(Node, type(node)):
         node = HTMLParser(node)
 

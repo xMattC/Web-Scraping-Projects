@@ -1,7 +1,6 @@
 import logging
 from config.tools import get_config
 from utilities.extract import extract_full_body_html
-from selectolax.parser import HTMLParser
 from utilities.parse import parse_raw_attributes
 from utilities.post_process import format_and_transform, save_to_file
 

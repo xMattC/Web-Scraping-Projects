@@ -1,5 +1,5 @@
 import scrapy
-from scrapers.countries_gdp.countries_gdp.items import CountryGdpItem
+from countries_gdp.items import CountryGdpItem
 
 class GdpSpider(scrapy.Spider):
     """

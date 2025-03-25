@@ -1,4 +1,4 @@
-from tools import extract_full_body_html
+from utilities.tools import extract_full_body_html
 from selectolax.parser import HTMLParser
 import pandas as pd
 

@@ -33,7 +33,6 @@ def main():
 
         # Parse the extracted HTML using Selectolax
         tree = HTMLParser(html)
-
         # Select elements based on the provided CSS selector
         divs = tree.css(config.get('container', {}).get('selector'))
 

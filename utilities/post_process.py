@@ -64,8 +64,10 @@ def regex(input_str: str, pattern: str, do_what: str = "findall") -> Union[List[
 
     if do_what == "findall":
         return re.findall(pattern, input_str)
+
     elif do_what == "split":
         return re.split(pattern, input_str)
+
     else:
         raise ValueError("Expected 'findall' or 'split'")
 
@@ -74,7 +76,9 @@ def extract_currency(price_str: str) -> str:
     """Extracts the currency symbol from a price string."""
     if not price_str:
         return ""
+
     match = re.search(r"[^\d.,\s]+", price_str)  # Matches first non-numeric character(s)
+
     return match.group() if match else ""
 
 

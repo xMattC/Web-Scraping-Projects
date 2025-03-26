@@ -1,4 +1,4 @@
-from utilities.tools import extract_full_body_html
+from scrapers.steam_specials.utilities import extract_full_body_html
 from selectolax.parser import HTMLParser
 import logging
 import os

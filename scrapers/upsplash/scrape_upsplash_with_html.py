@@ -1,4 +1,4 @@
-from scrapers.upsplash.utils.extract import extract_full_body_html
+from extract import extract_full_body_html
 from selectolax.parser import HTMLParser
 import logging
 import os
@@ -68,7 +68,7 @@ def save_images(img_urls: list[str], term: str, tag: str = ""):
         resp = get(url)  # Send GET request to download image
         logging.info(f"Downloading {url}...")
 
-        dest_dir = f'../outputs/up-splash/{term}'  # Define output directory path
+        dest_dir = f'outputs/up-splash/{term}'  # Define output directory path
         file_name = url.split("/")[-1]  # Extract filename from URL
 
         if not os.path.exists(dest_dir):
@@ -83,5 +83,5 @@ def save_images(img_urls: list[str], term: str, tag: str = ""):
 if __name__ == '__main__':
     # Run the scraper with a predefined list of search terms
     scrape_up_splash(
-        ['tigers', 'wolves', 'foxes', 'bears', 'rabbits']
+        ['tigers', 'wolves']  # , 'foxes', 'bears', 'rabbits']
     )

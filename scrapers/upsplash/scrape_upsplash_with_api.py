@@ -117,7 +117,7 @@ def download_images(img_urls: list[str], term: str, tag: str = ""):
             resp.raise_for_status()  # Raise error if HTTP request fails
             logging.info(f"Downloading {url}...")
 
-            dest_dir = f'../outputs/up-splash/{term}'  # Define output directory path based on search term
+            dest_dir = f'outputs/up-splash/{term}'  # Define output directory path based on search term
             file_name = url.split("/")[-1]  # Extract filename from URL
 
             if not os.path.exists(dest_dir):

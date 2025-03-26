@@ -4,15 +4,10 @@ from dataclasses import dataclass
 from tabulate import tabulate
 
 
-# ---------------------------
-# Data Classes
-# ---------------------------
-
 @dataclass
 class Stock:
-    """
-    Represents a stock with its ticker, exchange, price, and currency.
-    Automatically fetches price data upon initialization.
+    """ Represents a stock with its ticker, exchange, price, and currency. Automatically fetches price data upon
+        initialization.
     """
     ticker: str
     exchange: str
@@ -35,19 +30,14 @@ class Stock:
 
 @dataclass
 class Position:
-    """
-    Represents a stock position in a portfolio.
-    Holds a reference to a Stock object and the quantity owned.
-    """
+    """Represents a stock position in a portfolio. Holds a reference to a Stock object and the quantity owned."""
     stock: Stock
     quantity: int
 
 
 @dataclass
 class Portfolio:
-    """
-    Represents an investment portfolio holding multiple stock positions.
-    """
+    """ Represents an investment portfolio holding multiple stock positions."""
     positions: list[Position]
 
     def get_total_value(self):
@@ -62,10 +52,6 @@ class Portfolio:
 
         return total_value
 
-
-# ---------------------------
-# Helper Functions
-# ---------------------------
 
 def get_fx_to_usd(currency):
     """
@@ -157,10 +143,6 @@ def display_portfolio_summary(portfolio):
 
     print(f"Total portfolio value: ${portfolio_value:,.2f}.")
 
-
-# ---------------------------
-# Main Execution
-# ---------------------------
 
 if __name__ == "__main__":
     # Define stocks (some in different currencies)

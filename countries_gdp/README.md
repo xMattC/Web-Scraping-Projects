@@ -1,9 +1,10 @@
 # Countries GDP Scraper
 
+Target webpage: [List of countries by GDP (nominal)](https://en.wikipedia.org/wiki/List_of_countries_by_GDP_(nominal))
 ## Overview
+
 This Scrapy project extracts GDP data for various countries and stores it in an SQLite database. The scraper processes country names, GDP values, and the corresponding years, ensuring data integrity and removing duplicates before saving the information.
 
-Target webpage: [List of countries by GDP (nominal)](https://en.wikipedia.org/wiki/List_of_countries_by_GDP_(nominal))
 
 Target Data: 
 

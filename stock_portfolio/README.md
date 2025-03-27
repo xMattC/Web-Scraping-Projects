@@ -1,9 +1,8 @@
 
 # Stock Portfolio Tracker
-
-## Overview
  Target webpage: [Google Finance]( https://www.google.com/finance/)
-
+ 
+## Overview
 This project allows users to track their stock portfolio, including investments in multiple stocks listed on different exchanges. It automatically fetches the current stock price, converts non-USD prices to USD, and displays a summary of the portfolio, including total value and percentage allocations for each stock.
 
 ### Features:

@@ -1,4 +1,4 @@
 .env
 .idea
-scrapers/unsplash/outputs/
-!scrapers/unsplash/outputs/.gitkeep
+unsplash/outputs/
+!unsplash/outputs/.gitkeep

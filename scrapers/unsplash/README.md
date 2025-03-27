@@ -20,6 +20,14 @@ The HTML-based scraper parses Unsplash's website structure and extracts image UR
 
 - The number of image to download is set by the websits first loading page.
 
+### Tools & Technologies Used
+
+- **Python**: The primary programming language for both scrapers.
+- **Playwright**: For headless browser interaction, used in HTML scraping.
+- **Selectolax**: A fast HTML parser for extracting image URLs.
+- **HTTPX**: A library for making HTTP requests to download images.
+- **Logging**: For real-time tracking of scraper progress and error handling.
+- **Scrapy**: For handling web scraping tasks.
 
 ## Installation
 
@@ -34,39 +42,25 @@ playwright install chromium
 
 ## Usage
 
-### 1. API-Based Scraper
-
-The API-based scraper retrieves images using HTTP requests and saves them to local storage.
-
 Run the script:
-
+- firsrt configure the ``` if __name__ == "__main__":``` section of the script then:
 ```bash
-python scrape_upsplash_with_api.py
+python scrape_upsplash_with_api.py "or" python scrape_upsplash_with_html.py
 ```
 
 Example usage in Python:
+
 
 ```python
 from scrape_upsplash_with_api import scrape_upsplash_using_api
 scrape_upsplash_using_api(["nature", "sunset"], result=30)
-```
 
-### 2. HTML-Based Scraper
+"OR"
 
-The HTML-based scraper fetches images by parsing Unsplash’s webpage structure.
-
-Run the script:
-
-```bash
-python scrape_upsplash_with_html.py
-```
-
-Example usage in Python:
-
-```python
 from scrape_upsplash_with_html import scrape_up_splash
 scrape_up_splash(["mountains", "forests"])
 ```
+
 ## Output
 
 Downloaded images are stored in:

@@ -9,6 +9,12 @@ Target Data:
 
 ![GDP Data Overview](gdp_table.png)
 
+### Tools & Technologies Used
+
+- **Python**: The primary programming language.
+- **Scrapy**: For handling web scraping tasks.
+- **SQLite**: A lightweight, serverless, self-contained SQL database engine.
+
 ## Components
 
 ### 1. `items.py`

@@ -64,5 +64,5 @@ scrape_up_splash(["mountains", "forests"])
 Downloaded images are stored in:
 
 ```
-outputs/up-splash/<search_term>/ 
+unsplash/outputs/<search_term>/ 
 ```

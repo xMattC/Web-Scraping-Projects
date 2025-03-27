@@ -23,7 +23,7 @@ Both methods organize downloaded images into separate folders based on search te
 Ensure you have the required dependencies installed:
 
 ```bash
-pip install scrapy httpx playwright selectolax
+pip install httpx playwright selectolax
 playwright install chromium
 ```
 
@@ -46,7 +46,7 @@ The HTML-based scraper parses Unsplash's website structure and extracts image UR
 python scrape_upsplash_with_api.py "or" python scrape_upsplash_with_html.py
 ```
 
-Example usage in Python:
+### Example usage in Python:
 
 
 ```python

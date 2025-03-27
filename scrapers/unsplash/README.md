@@ -4,14 +4,14 @@
 ## Overview
 Scrapes website: [Unsplash.com](https://unsplash.com/)
 
-This project provides two different methods to scrape images from Unsplash and download them based on search terms (or list of search learms).
+This project provides two different methods to scrape images from Unsplash and download them based on search terms (or list of search tearms).
 
 Both methods organize downloaded images into separate folders based on search terms.
 
 ### 1. API-Based Scraper (`scrape_upsplash_with_api.py`)
 
 The API-based scraper interacts directly with the Unsplash API to fetch high-quality image URLs and download them efficiently. 
-- The number of image to download is set by the user.
+- The number of image to download per search term is set by the user.
 
 ### 2. HTML-Based Scraper (`scrape_upsplash_with_html.py`)
 

@@ -72,13 +72,3 @@ Please note that the web scraping scripts in this repository rely on extracting 
 2. **Update the Scraper**: Once you've identified any changes, update the scraping logic in the script (e.g., change the CSS selectors, update the parsing logic).
 
 3. **Test the Script**: After making updates, thoroughly test the script to ensure it works as expected. Verify that all necessary data is extracted and that the program doesn't break with new changes.
-
-
-### Legal Disclaimer
-Scraping websites can potentially violate their Terms of Service. Always ensure that you are complying with the rules and guidelines set by the website you are scraping. Here are some general guidelines:
-
-✅ Allowed: Public data, API endpoints with permission.
-
-❌ Not Allowed: Personal data, login-protected content.
-
-Before running any scraper, always review the website’s robots.txt file to check which pages or resources are allowed to be scraped. Make sure to respect the site's policies to avoid any legal issues.

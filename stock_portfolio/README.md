@@ -21,14 +21,6 @@ This project allows users to track their stock portfolio, including investments 
 - **Google Finance**: Used as the source for live stock price and currency data.
 - **Data Classes**: Python `dataclass` to manage stock and portfolio objects.
 
-## Installation
-
-To run this project, you need Python installed along with the following dependencies:
-
-```bash
-pip install requests beautifulsoup4 tabulate
-```
-
 ## Usage
 1) Create Stock Objects: Create Stock objects with the ticker and exchange details.
 

@@ -17,10 +17,9 @@ This project uses the following tools and technologies:
 - **Playwright**: For scraping websites with dynamic content (JavaScript rendering).
 - **BeautifulSoup**: A library for parsing HTML and XML documents, used to extract data from web pages.
 - **requests**: A library to send HTTP requests and retrieve data from websites.
-- **Selectolax**: A fast HTML parser for extracting image URLs.
-- **HTTPX**: A library for making HTTP requests to download images.
+- **Selectolax**: A fast HTML parser.
+- **HTTPX**: A library for making HTTP requests.
 - **SQLite**: A lightweight, serverless, self-contained SQL database engine.
-- **Logging**: For real-time tracking of scraper progress and error handling.
 - **pandas**: A data manipulation library to structure and save scraped data into CSV format.
 
 ## Installation & Setup

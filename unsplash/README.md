@@ -1,17 +1,17 @@
 
-# Unsplash Scraper
+# Unsplash Image Scraper
 
 ## Overview
 Scrapes website: [Unsplash.com](https://unsplash.com/)
 
-Target Data example: Dogs entered as a search term on the web site:
+Target data example - Dogs entered as a search term on the web site:
 
 ![GDP Data Overview](unsplash.png)
 
 
 This project provides two different methods to scrape images from Unsplash based on search terms and download them.
 
-Both methods organize downloaded images into separate folders based on search terms.
+Both methods organise downloaded images into separate folders based on search terms.
 
 ### Tools & Technologies Used
 

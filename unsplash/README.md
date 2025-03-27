@@ -2,9 +2,14 @@
 # Unsplash Scraper
 
 ## Overview
-Target webpage: [Unsplash.com](https://unsplash.com/)
+Scrapes website: [Unsplash.com](https://unsplash.com/)
 
-This project provides two different methods to scrape images from Unsplash and download them based on search terms (or list of search tearms).
+Target Data example: Dogs entered as a search term on the web site:
+
+![GDP Data Overview](unsplash.png)
+
+
+This project provides two different methods to scrape images from Unsplash based on search terms and download them.
 
 Both methods organize downloaded images into separate folders based on search terms.
 
@@ -15,17 +20,6 @@ Both methods organize downloaded images into separate folders based on search te
 - **Selectolax**: A fast HTML parser for extracting image URLs.
 - **HTTPX**: A library for making HTTP requests to download images.
 - **Logging**: For real-time tracking of scraper progress and error handling.
-
-## Installation
-
-### Prerequisites
-
-Ensure you have the required dependencies installed:
-
-```bash
-pip install httpx playwright selectolax
-playwright install chromium
-```
 
 ## Usage
 
@@ -55,7 +49,7 @@ scrape_unsplash_using_api(["nature", "sunset"], result=30)
 
 "OR"
 
-from scrape_upsplash_with_html import scrape_up_splash
+from scrape_unsplash_with_html import scrape_up_splash
 scrape_up_splash(["mountains", "forests"])
 ```
 

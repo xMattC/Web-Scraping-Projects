@@ -29,29 +29,29 @@ playwright install chromium
 
 ## Usage
 
-### API-Based Scraper (`scrape_upsplash_with_api.py`)
+### API-Based Scraper (`scrape_unsplash_with_api.py`)
 
 The API-based scraper interacts directly with the Unsplash API to fetch high-quality image URLs and download them efficiently. 
 - The number of images to download per search term is set by the user.
 
-### HTML-Based Scraper (`scrape_upsplash_with_html.py`)
+### HTML-Based Scraper (`scrape_unsplash_with_html.py`)
 
-The HTML-based scraper parses Unsplash's website structure and extracts image URLs from the search results page. since this method relies on the current HTML structure of Unsplash, it may break if Unsplash updates its webpage layout.
+The HTML-based scraper parses Unsplash website structure and extracts image URLs from the search results page. since this method relies on the current HTML structure of Unsplash, it may break if Unsplash updates its webpage layout.
 
-- The number of images to download is set by the websits first loading page.
+- The number of images to download is set by the websites first loading page.
 
 ### Run the script(s):
-- firsrt configure the ``` if __name__ == "__main__":``` section of the script then:
+- first configure the ``` if __name__ == "__main__":``` section of the script then:
 ```bash
-python scrape_upsplash_with_api.py "or" python scrape_upsplash_with_html.py
+python scrape_unsplash_with_api.py "or" python scrape_unsplash_with_html.py
 ```
 
 ### Example usage in Python:
 
 
 ```python
-from scrape_upsplash_with_api import scrape_upsplash_using_api
-scrape_upsplash_using_api(["nature", "sunset"], result=30)
+from scrape_unsplash_with_api import scrape_unsplash_using_api
+scrape_unsplash_using_api(["nature", "sunset"], result=30)
 
 "OR"
 

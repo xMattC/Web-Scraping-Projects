@@ -5,7 +5,9 @@ This Scrapy project extracts GDP data for various countries and stores it in an 
 
 Target webpage: [List of countries by GDP (nominal)](https://en.wikipedia.org/wiki/List_of_countries_by_GDP_(nominal))
 
-Target Data: ![GDP Data Overview](gdp_table.png)
+Target Data: 
+
+![GDP Data Overview](gdp_table.png)
 
 ## Components
 

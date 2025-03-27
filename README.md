@@ -1,46 +1,83 @@
+
 # Web Scraping Scripts
 
-This repository contains various web scraping scripts for different websites. Each script extracts specific data and saves it in a CSV.
+This repository contains various web scraping scripts for different websites. Each script extracts specific data furtehr seatial con be foun in each scrapers README.md. 
 
-## Folder Structure
+The goal of this project is to provide reusable scraping solutions for common use cases and to demonstrate web scraping techniques.
 
-```plaintext
-web-scraping-scripts/
-├── scrapers/        # Contains individual scraper scripts
-├── outputs/         # Stores scraped data (CSV)
-├── README.md        # Documentation
-├── requirements.txt # Python dependencies
-└── .gitignore       # Files to ignore in version control
-```
+## Tools & Technologies
+
+This project uses the following tools and technologies:
+
+- **Python**: The primary programming language used for writing the web scraping scripts.
+- **Scrapy**: For handling web scraping tasks.
+- **Playwright**: For scraping websites with dynamic content (JavaScript rendering).
+- **BeautifulSoup**: A library for parsing HTML and XML documents, used to extract data from web pages.
+- **requests**: A library to send HTTP requests and retrieve data from websites.
+- **Selectolax**: A fast HTML parser for extracting image URLs.
+- **HTTPX**: A library for making HTTP requests to download images.
+- **SQLite**: A lightweight, serverless, self-contained SQL database engine.
+- **Logging**: For real-time tracking of scraper progress and error handling.
+- **pandas**: A data manipulation library to structure and save scraped data into CSV format.
 
 ## Installation & Setup
 
-### Clone the Repository
+Follow these steps to get the project up and running.
+
 ```bash
+# Download repo
 git clone https://github.com/xMattC/web-scraping-scripts.git
+
+# Move to dir
 cd web-scraping-scripts
 
-# Windows
+# Create the virtual environment:
 python -m venv .env
-venv\Scripts\Activate
 
-# macOS/Linux
-python3 -m venv .env
-source venv/bin/activate
-```
+# Activate the virtual environment:
+.\\.env\\Scripts\\Activate  # windows
+    "or"
+source .env/Scripts/Activate  # windows with git-bash
+    "or"
+source .env/bin/activate  # macOS/Linux
 
-### Install Dependencies
-```bash
+# Install dependencies
 pip install -r requirements.txt
+playwright install chromium
+```
+## Usage
+
+- Ensure virtual environment (.env) has been activated.
+- cd to required dir and run code in accordance with scrapers README.md
+
+
+```bash
+# Move to unsplash dir:
+cd unsplash
+
+# Run script in accordance with scraper README.py
+python scrape_unsplash_with_api.py
 ```
 
-### Running a Scraper
-```bash
-python scrapers/google_finance.py
-```
+## Caveat: Selectors and Website Changes
+
+Please note that the web scraping scripts in this repository rely on extracting specific HTML elements (selectors) from the target websites. Web pages can change their structure over time, meaning that the HTML tags, classes, or attributes used to locate the required data may no longer be valid. If a website changes its layout or structure, the current selectors may not work, leading to errors or incomplete data extraction.
+
+
+
+### How to Handle Selector Issues:
+1. **Inspect the Website**: Use the browser's developer tools (right-click → "Inspect") to view the HTML structure of the page. Look for the relevant data you want to scrape and check for any changes in the structure, class names, or tags.
+
+2. **Update the Scraper**: Once you've identified any changes, update the scraping logic in the script (e.g., change the CSS selectors, update the parsing logic).
+
+3. **Test the Script**: After making updates, thoroughly test the script to ensure it works as expected. Verify that all necessary data is extracted and that the program doesn't break with new changes.
+
 
 ### Legal Disclaimer
-Scraping websites may violate their Terms of Service. Always check a website's robots.txt file before scraping and ensure you are not breaking any rules.
+Scraping websites can potentially violate their Terms of Service. Always ensure that you are complying with the rules and guidelines set by the website you are scraping. Here are some general guidelines:
 
-- ✅ Allowed: Public data, API endpoints with permission.
-- ❌ Not Allowed: Personal data, login-protected content.
+✅ Allowed: Public data, API endpoints with permission.
+
+❌ Not Allowed: Personal data, login-protected content.
+
+Before running any scraper, always review the website’s robots.txt file to check which pages or resources are allowed to be scraped. Make sure to respect the site's policies to avoid any legal issues.

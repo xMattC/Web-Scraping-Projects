@@ -1,9 +1,12 @@
 
-# Web Scraping Scripts
+# Web Scraping projects
 
-This repository contains various web scraping scripts for different websites. Each script extracts specific data furtehr seatial con be foun in each scrapers README.md. 
+This repository contains various web scraping projects for different websites. Each project is contained within its own
+folder, and you can find specific documentation (README.md) and relevant files for each scraper inside the respective
+folders.
 
 The goal of this project is to provide reusable scraping solutions for common use cases and to demonstrate web scraping techniques.
+
 
 ## Tools & Technologies
 
@@ -49,7 +52,6 @@ playwright install chromium
 
 - Ensure virtual environment (.env) has been activated.
 - cd to required dir and run code in accordance with scrapers README.md
-
 
 ```bash
 # Move to unsplash dir:

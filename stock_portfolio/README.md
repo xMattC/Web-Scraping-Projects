@@ -71,9 +71,3 @@ Total portfolio value: $105,146.58.
 - The Portfolio class holds multiple Position objects and calculates the total portfolio value in USD.
 
 - The display_portfolio_summary function outputs the stock positions, including the percentage allocation, and displays the total portfolio value.
-
-### Notes
-- This project uses Google Finance to fetch stock prices and exchange rates. It may be limited or blocked based on the frequency of requests.
-
-- Stock prices are fetched live, so the data may change depending on market fluctuations.
-se.

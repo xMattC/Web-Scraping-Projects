@@ -26,7 +26,6 @@ The HTML-based scraper parses Unsplash's website structure and extracts image UR
 - **Selectolax**: A fast HTML parser for extracting image URLs.
 - **HTTPX**: A library for making HTTP requests to download images.
 - **Logging**: For real-time tracking of scraper progress and error handling.
-- **Scrapy**: For handling web scraping tasks.
 
 ## Installation
 

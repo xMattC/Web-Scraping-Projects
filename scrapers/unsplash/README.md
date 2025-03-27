@@ -11,13 +11,13 @@ Both methods organize downloaded images into separate folders based on search te
 ### 1. API-Based Scraper (`scrape_upsplash_with_api.py`)
 
 The API-based scraper interacts directly with the Unsplash API to fetch high-quality image URLs and download them efficiently. 
-- The number of image to download per search term is set by the user.
+- The number of images to download per search term is set by the user.
 
 ### 2. HTML-Based Scraper (`scrape_upsplash_with_html.py`)
 
 The HTML-based scraper parses Unsplash's website structure and extracts image URLs from the search results page. since this method relies on the current HTML structure of Unsplash, it may break if Unsplash updates its webpage layout.
 
-- The number of image to download is set by the websits first loading page.
+- The number of images to download is set by the websits first loading page.
 
 ### Tools & Technologies Used
 

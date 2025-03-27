@@ -68,7 +68,7 @@ def save_images(img_urls: list[str], term: str, tag: str = ""):
         resp = get(url)  # Send GET request to download image
         logging.info(f"Downloading {url}...")
 
-        dest_dir = f'outputs/unsplash/{term}'  # Define output directory path
+        dest_dir = f'outputs/{term}'  # Define output directory path
         file_name = url.split("/")[-1]  # Extract filename from URL
 
         if not os.path.exists(dest_dir):

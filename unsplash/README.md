@@ -2,7 +2,7 @@
 # Unsplash Scraper
 
 ## Overview
-Scrapes website: [Unsplash.com](https://unsplash.com/)
+Target webpage: [Unsplash.com](https://unsplash.com/)
 
 This project provides two different methods to scrape images from Unsplash and download them based on search terms (or list of search tearms).
 

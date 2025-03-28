@@ -18,6 +18,10 @@ DOWNLOAD_HANDLERS = {
     "https": "scrapy_playwright.handler.ScrapyPlaywrightDownloadHandler",
 }
 TWISTED_REACTOR = "twisted.internet.asyncioreactor.AsyncioSelectorReactor"
+PLAYWRIGHT_BROWSER_TYPE = "chromium"  # Choose 'chromium', 'firefox', or 'webkit'
+PLAYWRIGHT_LAUNCH_OPTIONS = {
+    "headless": False,  # Set to True if you prefer headless mode
+}
 # end of Play-write specific settings -----------------
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent

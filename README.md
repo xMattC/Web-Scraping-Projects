@@ -46,6 +46,8 @@ source .env/bin/activate  # macOS/Linux
 # Install dependencies
 pip install -r requirements.txt
 playwright install chromium
+pip install scrapy-playwright
+playwright install
 ```
 ## Usage
 

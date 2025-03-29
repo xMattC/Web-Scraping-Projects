@@ -11,7 +11,7 @@ class GetJobsSpider(scrapy.Spider):
     allowed_domains = ["www.workingnomads.com"]
     start_urls = ["https://www.workingnomads.com/jobs"]
 
-    def __init__(self, n_listings=500, **kwargs):
+    def __init__(self, n_listings=200, **kwargs):
         super().__init__(**kwargs)
         self.required_jobs = int(n_listings)
         self.js_code = self.load_js_code(3000)
@@ -38,32 +38,7 @@ class GetJobsSpider(scrapy.Spider):
                     PageMethod("wait_for_selector", 'div.jobs-list div.job-wrapper'),
                     PageMethod("wait_for_selector", "#accept-btn"),
                     PageMethod("click", "#accept-btn"),
-                    # PageMethod("evaluate", f"{self.js_code}"),
                     PageMethod("evaluate", self.js_code),
-
-                    # PageMethod("evaluate",
-                    #
-                    #            f"""
-                    #                 let count = 0;
-                    #                 const load_pages = {5};  // Injected Python variable
-                    #                 async function clickLoadMore() {{
-                    #                     while (count < load_pages) {{
-                    #                         const button = document.querySelector('div.show-more');
-                    #
-                    #                         if (button) {{
-                    #                             button.scrollIntoView({{ behavior: 'smooth', block: 'center' }});
-                    #                             button.click();
-                    #                             count++;
-                    #                             console.log("Clicked, count:", count);  // Debug log
-                    #                             await new Promise(resolve => setTimeout(resolve, 5000));
-                    #
-                    #                         }} else {{
-                    #                             break;
-                    #                         }}
-                    #                     }}
-                    #                 }}
-                    #                 clickLoadMore();
-                    #             """),
                 ]
             )
         )

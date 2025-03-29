@@ -17,10 +17,8 @@ class GetJobsSpider(scrapy.Spider):
         self.js_code = self.load_js_code(3000)
 
     def load_js_code(self, click_timeout):
-
         load_pages = math.ceil(self.required_jobs / 100) - 1
         file_path = Path.joinpath(Path.cwd(), "job_site/spiders/page_method.js")
-
         with open(file_path, "r") as js_file:
             js_code = js_file.read()
 
@@ -44,16 +42,34 @@ class GetJobsSpider(scrapy.Spider):
         )
 
     async def parse(self, response):
+
+        # Loop through each job in the response
         for job in response.css('div.jobs-list div.job-wrapper'):
             item = ItemLoader(item=JobContainerItem(), selector=job)
-            item.add_css("job_name", 'a.open-button.ng-binding::text')
-            item.add_css("job_link", 'a.open-button.ng-binding::attr(href)')
-            item.add_css("ng_href", 'a.open-button.ng-binding::attr(ng-href)')
-            item.add_css("company_name", 'div.company a::text')
+
+            # Extract job name (ensure the selector is correct)
+            item.add_css("job_name", 'h4.hidden-xs a.open-button.ng-binding::text')
+
+            # Extract job link (check for ng-href attribute)
+            item.add_css("job_link", 'a.open-button.ng-binding::attr(ng-href)')
+
+            # Extract company name (check the correct CSS selector for company)
+            item.add_css("company_name", 'div.company.hidden-xs a::text')
+
+            # Extract job location (ensure the selector is correct)
             item.add_css("job_location", 'div.box i.fa-map-marker + span::text')
+
+            # Extract work type (ensure the correct selector for work type)
             item.add_css("work_type", 'div.box i.fa-clock-o + span::text')
+
+            # Extract tags (ensure the correct selector for tags)
             item.add_css("tags", 'div.box i.fa-tags + a::text')
-            yield item.load_item()
+
+            # Extract the data as a dictionary and check what is being yielded
+            job_data = item.load_item()
+            print(job_data)  # Debugging: print the data to see what's being extracted
+
+            yield job_data
 
             # yield {
             #     "job_name": job.css("a.open-button.ng-binding::text").get(),

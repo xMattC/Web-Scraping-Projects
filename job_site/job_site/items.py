@@ -8,6 +8,11 @@ def remove_newlines(value):
     return value.replace("\n", "").strip()  # Remove newlines and extra spaces
 
 
+def modify_job_link(link):
+    new_link = f"https://www.workingnomads.com{link}"
+    return new_link
+
+
 class JobContainerItem(scrapy.Item):
     # Country name field with text cleaning and extraction
     job_name = scrapy.Field(
@@ -17,7 +22,7 @@ class JobContainerItem(scrapy.Item):
 
     # Year field with text cleaning, year extraction, and conversion to integer
     job_link = scrapy.Field(
-        input_processor=MapCompose(remove_tags, str.strip),
+        input_processor=MapCompose(remove_tags, str.strip, modify_job_link),
         output_processor=Join()
     )
 

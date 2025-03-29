@@ -39,19 +39,17 @@ class GetJobsSpider(scrapy.Spider):
             )
         )
 
-    async def parse(self, response):
+    def parse(self, response):
         for job in response.css('div.jobs-list div.job-wrapper'):
-
             item = ItemLoader(item=JobContainerItem(), selector=job)
             item.add_css("job_name", 'a.open-button.ng-binding::text')
-            # item.add_css("job_link", 'a.open-button.ng-binding::attr(href)')
-            # item.add_css("ng_href", 'a.open-button.ng-binding::attr(ng-href)')
-            # item.add_css("company_name", 'div.company a::text')
-            # item.add_css("job_location", 'div.box i.fa-map-marker + span::text')
-            # item.add_css("work_type", 'div.box i.fa-clock-o + span::text')
-            # item.add_css("tags", 'div.box i.fa-tags + a::text')
-            # item.add_css("", '')
-            yield item.load_item
+            item.add_css("job_link", 'a.open-button.ng-binding::attr(href)')
+            item.add_css("ng_href", 'a.open-button.ng-binding::attr(ng-href)')
+            item.add_css("company_name", 'div.company a::text')
+            item.add_css("job_location", 'div.box i.fa-map-marker + span::text')
+            item.add_css("work_type", 'div.box i.fa-clock-o + span::text')
+            item.add_css("tags", 'div.box i.fa-tags + a::text')
+            yield item.load_item()
 
             #  Before item processing:
             # yield {

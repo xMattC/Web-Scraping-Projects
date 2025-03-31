@@ -50,6 +50,7 @@ class SaveToDatabasePipeline:
                     item.get("company_name", ""),
                     item.get("job_location", ""),
                     item.get("work_type", ""),
+                    item.get("salary", ""),
                     tags_str
                 )
             )
@@ -85,6 +86,7 @@ class CsvExportPipeline:
             "company_name": item.get("company_name", ""),
             "job_location": item.get("job_location", ""),
             "work_type": item.get("work_type", ""),
+            "salary": item.get("salary", ""),  # Ensure salary is included
             "tags": ", ".join(item.get("tags", []))  # Join tags into a single string
         }
 

@@ -13,7 +13,7 @@ class GetJobsSpider(scrapy.Spider):
 
     def __init__(self, n_listings=200, **kwargs):
         """ Initialization method to set up the number of listings required and the JS code for page interaction.
-        :param n_listings: The total number of job listings the spider should scrape
+        param n_listings: The total number of job listings the spider should scrape
         """
         super().__init__(**kwargs)  # Initialize the parent class (Spider)
         self.required_jobs = int(n_listings)  # Set the number of jobs to scrape
@@ -21,8 +21,8 @@ class GetJobsSpider(scrapy.Spider):
 
     def load_js_code(self, click_timeout):
         """ This function loads the JavaScript code that will be executed to load additional job listings.
-        :param click_timeout: Time in milliseconds to wait for the page to load after clicking
-        :return: The modified JavaScript code with the appropriate number of pages to load
+        param click_timeout: Time in milliseconds to wait for the page to load after clicking
+        return: The modified JavaScript code with the appropriate number of pages to load
         """
         jobs_per_page = 50  # How many jobs does the site load per page? This may change
         load_pages = math.ceil(self.required_jobs / jobs_per_page) - 1  # Calculate how many pages to load

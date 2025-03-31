@@ -63,7 +63,7 @@ ROBOTSTXT_OBEY = True
 # See https://docs.scrapy.org/en/latest/topics/item-pipeline.html
 ITEM_PIPELINES = {
     "countries_gdp.pipelines.CountriesGdpPipeline": 1,
-    "countries_gdp.pipelines.RemoveDuplicatesPipeline": 2,
+    # "countries_gdp.pipelines.RemoveDuplicatesPipeline": 2,
     "countries_gdp.pipelines.SaveToDatabasePipeline": 3,
 }
 

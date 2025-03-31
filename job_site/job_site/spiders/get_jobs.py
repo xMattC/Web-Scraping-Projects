@@ -17,7 +17,8 @@ class GetJobsSpider(scrapy.Spider):
         self.js_code = self.load_js_code(3000)
 
     def load_js_code(self, click_timeout):
-        load_pages = math.ceil(self.required_jobs / 100) - 1
+        jobs_per_page = 50  # How many jobs doe the site load? this may chang
+        load_pages = math.ceil(self.required_jobs / jobs_per_page) - 1
         file_path = Path.joinpath(Path.cwd(), "job_site/spiders/page_method.js")
         with open(file_path, "r") as js_file:
             js_code = js_file.read()
@@ -44,32 +45,35 @@ class GetJobsSpider(scrapy.Spider):
     async def parse(self, response):
 
         # Loop through each job in the response
-        for job in response.css('div.jobs-list div.job-wrapper'):
-            item = ItemLoader(item=JobContainerItem(), selector=job)
+        for job in response.css('div.jobs-list div.ng-scope div.job-wrapper'):
+            job_title = job.css('h4.hidden-xs a.open-button.ng-binding::text').get()
+            if job_title and job_title.strip():  # Check if title exists and is not empty
+                item = ItemLoader(item=JobContainerItem(), selector=job)
+                item.add_css("job_name", 'h4.hidden-xs a.open-button.ng-binding::text')
+                # Extract job link (check for ng-href attribute)
+                item.add_css("job_link", 'a.open-button.ng-binding::attr(ng-href)')
 
-            # Extract job name (ensure the selector is correct)
-            item.add_css("job_name", 'h4.hidden-xs a.open-button.ng-binding::text')
+                # Extract company name (check the correct CSS selector for company)
+                item.add_css("company_name", 'div.company.hidden-xs a::text')
 
-            # Extract job link (check for ng-href attribute)
-            item.add_css("job_link", 'a.open-button.ng-binding::attr(ng-href)')
+                # Extract job location (ensure the selector is correct)
+                item.add_css("job_location", 'div.box i.fa-map-marker + span::text')
 
-            # Extract company name (check the correct CSS selector for company)
-            item.add_css("company_name", 'div.company.hidden-xs a::text')
+                # Extract work type (ensure the correct selector for work type)
+                item.add_css("work_type", 'div.box i.fa-clock-o + span::text')
 
-            # Extract job location (ensure the selector is correct)
-            item.add_css("job_location", 'div.box i.fa-map-marker + span::text')
+                # Extract tags (ensure the correct selector for tags)
+                tags = job.css('div.box.hidden-xs.ng-scope a::text').getall()
+                item.add_value("tags", tags)
 
-            # Extract work type (ensure the correct selector for work type)
-            item.add_css("work_type", 'div.box i.fa-clock-o + span::text')
+                tags = job.xpath(
+                    './/div[contains(@class, "box") and contains(@class, "hidden-xs") and contains(@class, "ng-scope")]/a/text()').getall()
+                item.add_value("tags", tags)
 
-            # Extract tags (ensure the correct selector for tags)
-            item.add_css("tags", 'div.box i.fa-tags + a::text')
+                # Extract the data as a dictionary and check what is being yielded
+                job_data = item.load_item()
 
-            # Extract the data as a dictionary and check what is being yielded
-            job_data = item.load_item()
-            print(job_data)  # Debugging: print the data to see what's being extracted
-
-            yield job_data
+                yield job_data
 
             # yield {
             #     "job_name": job.css("a.open-button.ng-binding::text").get(),

@@ -54,41 +54,39 @@ class GetJobsSpider(scrapy.Spider):
         )
 
     async def parse(self, response):
-        """ This is the callback function that processes the response and extracts job data.
-        It loops through all job listings on the page and extracts relevant details.
-        """
+        """ This callback function processes the response and extracts job data. """
+
+        count = 0  # Initialize count
+
         # Loop through each job in the response
         for job in response.css('div.jobs-list div.ng-scope div.job-wrapper'):
-            job_title = job.css('h4.hidden-xs a.open-button.ng-binding::text').get()  # Extract job title
 
-            if job_title and job_title.strip():  # Check if the job title exists and is not empty
-                item = ItemLoader(item=JobContainerItem(), selector=job)  # Initialize the item loader
+            if count >= self.required_jobs:  # Stop when enough jobs are collected
+                break
 
-                # Add job name to the item using a CSS selector
+            job_title = job.css('h4.hidden-xs a.open-button.ng-binding::text').get()
+
+            if job_title and job_title.strip():  # Ensure job title is valid
+                count += 1
+                item = ItemLoader(item=JobContainerItem(), selector=job)  # Initialize item loader
+
+                # Add job details
                 item.add_css("job_name", 'h4.hidden-xs a.open-button.ng-binding::text')
-
-                # Add job link to the item using a CSS selector (extracts the "ng-href" attribute)
                 item.add_css("job_link", 'a.open-button.ng-binding::attr(ng-href)')
-
-                # Add company name to the item
                 item.add_css("company_name", 'div.company.hidden-xs a::text')
-
-                # Add job location to the item
                 item.add_css("job_location", 'div.box i.fa-map-marker + span::text')
-
-                # Add work type (e.g., Full-time, Part-time) to the item
                 item.add_css("work_type", 'div.box i.fa-clock-o + span::text')
 
-                # Extract job tags using XPath (list of tags in the job description)
+                # Extract job tags
                 tags = job.xpath(
-                    './/div[contains(@class, "box") and contains(@class, "hidden-xs") and contains(@class, "ng-scope")]/a/text()').getall()
-                item.add_value("tags", tags)  # Add tags to the item
+                    './/div[contains(@class, "box") and contains(@class, "hidden-xs") and contains(@class, "ng-scope")]/a/text()'
+                ).getall()
+                item.add_value("tags", tags)
 
-                # Load the item and yield it (this makes the item available to the pipeline)
-                job_data = item.load_item()
-                yield job_data  # Send the job data to the pipeline
+                # Yield the item
+                yield item.load_item()
 
-            # Alternative way to yield a job if needed (commented out):
-            # yield {
-            #     "job_name": job.css("a.open-button.ng-binding::text").get(),
-            # }
+                # Alternative way to yield a job if needed (commented out):
+                # yield {
+                #     "job_name": job.css("a.open-button.ng-binding::text").get(),
+                # }

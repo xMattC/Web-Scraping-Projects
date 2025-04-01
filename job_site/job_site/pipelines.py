@@ -26,7 +26,6 @@ class SaveToDatabasePipeline:
                 company_name TEXT,
                 job_location TEXT,
                 work_type TEXT,
-                salary TEXT,
                 tags TEXT  -- Tags will be stored as a comma-separated string
             )
             """
@@ -41,8 +40,8 @@ class SaveToDatabasePipeline:
             self.cur.execute(
                 """
                 INSERT INTO job_listings 
-                (job_name, job_link, company_name, job_location, work_type, salary, tags) 
-                VALUES (?, ?, ?, ?, ?, ?, ?)
+                (job_name, job_link, company_name, job_location, work_type, tags) 
+                VALUES (?, ?, ?, ?, ?, ?)
                 """,
                 (
                     item.get("job_name", ""),

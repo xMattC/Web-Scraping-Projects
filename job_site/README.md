@@ -1,56 +1,71 @@
-
-# Job site Scraper
+# Job Site Scraper
 
 ## Overview
-Scrapes website: [WorkingNomads.com](https://www.workingnomads.com/jobs)
 
-Target data example - Job listings scraped from the website:
+This project is a web scraper designed to extract remote job listings from [WorkingNomads.com](https://www.workingnomads.com/jobs). It gathers key job-related details such as:
+
+- Job title
+- Company name
+- Job location
+- Work type (e.g., full-time, part-time)
+- Job link
+- Associated tags (e.g., skills, categories)
+
+The extracted data is structured and can be stored in a database or exported in CSV or JSON format for further analysis.
+
+### Screenshot
 
 ![Job Scraping Overview](job_scraping.png)
 
-This project scrapes job listings from **WorkingNomads.com**, a site dedicated to remote job opportunities. It extracts key data such as job titles, company names, job locations, work types, job links, and tags. The extracted data is structured and ready for further analysis or storage.
 
-### Tools & Technologies Used
+## Technologies Used
 
-- **Python**: The primary programming language for the scraper.
-- **Scrapy**: A powerful web scraping framework for extracting data from websites.
-- **Playwright**: For headless browser interaction, used in dynamic content scraping.
-- **Item Loaders**: For processing and cleaning the scraped data.
-- **SQLite** (Optional): For storing the scraped data in a local database.
-- **CSV**: For exporting scraped data into CSV files for easy analysis.
+- **Python**: Core programming language for the scraper.
+- **Scrapy**: Web scraping framework for data extraction.
+- **Playwright**: Handles JavaScript-rendered content for dynamic scraping.
+- **Item Loaders**: Cleans and processes extracted data.
+- **SQLite** (Optional): Stores job listings in a local database.
+- **CSV & JSON**: Enables easy data export for analysis.
 
-## Usage
+## How It Works
 
 ### Scraper (`get_jobs.py`)
 
-The main scraper interacts with the **Working Nomads** website and extracts job listings data. The scraper uses **Playwright** for headless browser interaction to handle dynamic content.
+The scraper uses **Scrapy** and **Playwright** to interact with the **Working Nomads** website, dynamically loading job listings and extracting relevant information.
 
-- The number of job listings to scrape is set by the user in the `n_listings` parameter (default is 200).
+- The number of job listings to scrape is configurable via the `n_listings` parameter (default: 200).
+- **Playwright** enables handling of JavaScript content, ensuring all jobs are fully loaded before extraction.
+- Extracted data is processed using Scrapy's **Item Loaders** for cleaning and structuring.
+- Data can be stored in:
+  - **CSV file** (`jobs.csv`)
+  - **JSON file** (`jobs.json`)
+  - **SQLite database** (`jobs.db`, optional)
 
-### Run the script:
+### Example Usage:
 
-First, configure the script as needed, then run the following:
+Using main_jobs.py:
+- first configure the ``` if __name__ == "__main__":``` section of the main_jobs.py script 
+- then cd: \scrapers\job_site> 
 
 ```bash
-python get_jobs.py
+python main_jobs.py
 ```
+OR
 
-The scraper will collect job listings, process them using item loaders, and output the data in CSV format or save it to a database (optional).
+- open a teminal 
+- cd: \scrapers\job_site> 
 
-### Example usage in Python:
-
-```python
-from get_jobs import GetJobsSpider
-# Define the number of listings to scrape
-spider = GetJobsSpider(n_listings=100)
+```bash
+scrapy crawl get_jobs -a n_listings=201
 ```
 
 ## Output
 
-The scraped job listings are stored in:
+Depending on the chosen format, the scraped job listings will be saved in:
 
-```
-working_nomads_jobs.csv
-```
-
-Or, if you choose to store data in a database, the data will be saved in an SQLite database (default filename: `jobs.db`).
+- `jobs.csv` (CSV format)
+- `jobs.json` (JSON format)
+- `jobs.db` (SQLite database, if enabled)
+ 
+![Job Scraping Overview](db_image.png)
+---

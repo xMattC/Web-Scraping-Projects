@@ -19,7 +19,7 @@ The extracted data is structured and saved as a CSV file for further analysis.
 
 ### Screenshot
 
-![Steam speacials](steam_specials.png)
+![Steam specials](steam_specials.png)
 
 ### Tools & Technologies
 

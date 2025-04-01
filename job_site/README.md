@@ -45,7 +45,7 @@ The scraper uses **Scrapy** and **Playwright** to interact with the **Working No
 
 Using main_jobs.py:
 - first configure the ``` if __name__ == "__main__":``` section of the main_jobs.py script 
-- then cd: \scrapers\job_site> 
+- then cd: \Web-Scraping-Projects\job_site> 
 
 ```bash
 python main_jobs.py
@@ -53,7 +53,7 @@ python main_jobs.py
 OR
 
 - open a teminal 
-- cd: \scrapers\job_site> 
+- cd: \Web-Scraping-Projects\job_site> 
 
 ```bash
 scrapy crawl get_jobs -a n_listings=201

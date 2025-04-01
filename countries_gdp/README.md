@@ -20,8 +20,8 @@ Target Data:
 
 Using main_gdp.py:
 
-    first configure the  if __name__ == "__main__": section of the main_gdp.py script
-    then cd: \Web-Scraping-Projects\countries_gdp>
+- first configure the  if __name__ == "__main__": section of the main_gdp.py script
+- then cd: \Web-Scraping-Projects\countries_gdp>
 
 ```bash
 python main_main.py

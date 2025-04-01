@@ -29,14 +29,6 @@ The extracted data is structured and saved as a CSV file for further analysis.
 - **Pandas** for structuring and exporting data
 - **Logging** module for debugging and error handling
 
-## Features
-
-- **Automated Web Scraping:** Uses Playwright to navigate and extract game deal data.
-- **Configurable Extraction Rules:** CSS selectors and rules are stored in a configuration file for easy modification.
-- **Data Transformation & Cleaning:** Formats and processes extracted data, handling price formats, dates, and missing values.
-- **Logging & Error Handling:** Provides informative logs and handles extraction failures gracefully.
-- **CSV Export:** Saves extracted game listings in a structured CSV format.
-
 ## How It Works
 
 1. **Fetching Data:** The script launches a headless browser using Playwright to navigate the Steam Specials page.

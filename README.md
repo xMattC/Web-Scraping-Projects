@@ -28,10 +28,10 @@ Follow these steps to get the project up and running.
 
 ```bash
 # Download repo
-git clone https://github.com/xMattC/web-scraping-scripts.git
+git clone https://github.com/xMattC/Web-Scraping-Projects.git
 
 # Move to dir
-cd web-scraping-scripts
+cd Web-Scraping-Projects
 
 # Create the virtual environment:
 python -m venv .env

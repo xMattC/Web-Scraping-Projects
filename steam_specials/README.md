@@ -1,62 +1,72 @@
 # Steam Specials Scraper
 
 ## Overview
-This Python script scrapes discounted games from the Steam Specials page and saves the extracted data to a CSV file. It extracts relevant information such as game titles, discounts, prices, review scores, and tags using web scraping techniques.
+
+This project is a web scraper designed to extract game deal listings from [Steam Specials](https://store.steampowered.com/specials). It gathers key game-related details such as:
+
+- Game title
+- Tags (e.g., Action, RPG)
+- Release date
+- Review score
+- Review count
+- Original price
+- Sale price
+- Discount percentage
+- Currency
+- Thumbnail image URL
+
+The extracted data is structured and saved as a CSV file for further analysis.
+
+### Screenshot
+
+![Steam speacials](steam_specials.png)
+
+### Tools & Technologies
+
+- **Python** for scripting and data processing
+- **Playwright** for browser automation
+- **Selectolax** for fast HTML parsing
+- **Pandas** for structuring and exporting data
+- **Logging** module for debugging and error handling
 
 ## Features
-- Scrapes the latest game deals from [Steam Specials](https://store.steampowered.com/specials)
-- Extracts:
-  - Game title
-  - Release date
-  - Review score and review count
-  - Original and discounted price
-  - Discount percentage
-  - Game tags (up to 5)
-  - Thumbnail image URL
-- Saves the extracted data in a structured CSV format
 
-## Installation & Setup
+- **Automated Web Scraping:** Uses Playwright to navigate and extract game deal data.
+- **Configurable Extraction Rules:** CSS selectors and rules are stored in a configuration file for easy modification.
+- **Data Transformation & Cleaning:** Formats and processes extracted data, handling price formats, dates, and missing values.
+- **Logging & Error Handling:** Provides informative logs and handles extraction failures gracefully.
+- **CSV Export:** Saves extracted game listings in a structured CSV format.
 
-### Clone the Repository
-```bash
-git clone https://github.com/xMattC/steam_offers_scraper.git
-cd steam_offers_scraper
+## How It Works
 
-# Windows
-python -m venv .env
-venv\Scripts\Activate
-
-# macOS/Linux
-python3 -m venv .env
-source venv/bin/activate
-```
-
-### Install Dependencies
-```bash
-pip install -r requirements.txt
-playwright install chromium
-```
+1. **Fetching Data:** The script launches a headless browser using Playwright to navigate the Steam Specials page.
+2. **Parsing HTML:** Selectolax is used to extract relevant game details using CSS selectors.
+3. **Processing Data:** Extracted data is cleaned and formatted into a structured form.
+4. **Exporting Data:** The processed game listings are saved as a CSV file for analysis.
 
 ## Usage
-Run the script using Python:
 
-```bash
+Run the scraper with:
+```sh
 python main.py
 ```
 
-This will generate an output CSV file at:
+The extracted data will be saved in the `outputs/` directory with a timestamped filename.
 
-```
-../outputs/(todays-date)_steam_deals.csv
-```
+## Example Output
 
-## Output Format
-The script generates a CSV file with the following columns:
-
-| Title  | Tags                                     | Release Date | Review Score  | Review Count | Original Price | Currency | Sale Price | Discount | Thumbnail URL |
-|--------|-----------------------------------------|-------------|--------------|--------------|---------------|----------|------------|----------|--------------|
-| Game 1 | Action, RPG, Casual, Simulation, Automobile Sim | YYYY-MM-DD  | Very Positive | 10,000       | 59.99         | £        | 29.99      | 50%      | https://.....Image URL    |
+| Title               | Tags     | Release Date | Review Score | Review Count | Original Price | Sale Price | Discount |
+|---------------------|---------|--------------|--------------|--------------|---------------|------------|----------|
+| Cyberpunk 2077     | RPG     | 2020-12-10   | Overwhelmingly Positive | 50000 | 59.99 | 29.99 | -50% |
+| The Witcher 3      | Action  | 2015-05-18   | Very Positive | 300000 | 39.99 | 9.99  | -75% |
 
 
-## Notes
-- If Steam changes its website structure, the CSS selectors may need updates (i.e. in config --> tools)
+
+## Known Issues
+
+- The scraper may break if Steam updates its website structure. Updating CSS selectors in `tools.py` can fix this.
+- Playwright requires a Chromium installation. Ensure `playwright install` is executed before running the script.
+
+## License
+
+This project is licensed under the MIT License.

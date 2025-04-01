@@ -37,10 +37,10 @@ The extracted data is structured and saved as a CSV file for further analysis.
 4. **Exporting Data:** The processed game listings are saved as a CSV file for analysis.
 
 ## Usage
-
-Run the scraper with:
-```sh
-python main.py
+- first configure the  if __name__ == "__main__": section of the main_steam.py script
+- then cd: \Web-Scraping-Projects\steam_specials>
+```
+python main_steam.py
 ```
 
 The extracted data will be saved in the `outputs/` directory with a timestamped filename.

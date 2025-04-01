@@ -16,6 +16,17 @@ Target Data:
 - **Scrapy**: For handling web scraping tasks.
 - **SQLite**: A lightweight, serverless, self-contained SQL database engine.
 
+## Example Usage:
+
+Using main_gdp.py:
+
+    first configure the  if __name__ == "__main__": section of the main_gdp.py script
+    then cd: \Web-Scraping-Projects\countries_gdp>
+
+```bash
+python main_main.py
+```
+
 ## Components
 
 ### 1. `items.py`

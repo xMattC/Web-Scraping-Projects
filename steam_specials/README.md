@@ -58,7 +58,3 @@ The extracted data will be saved in the `outputs/` directory with a timestamped 
 
 - The scraper may break if Steam updates its website structure. Updating CSS selectors in `tools.py` can fix this.
 - Playwright requires a Chromium installation. Ensure `playwright install` is executed before running the script.
-
-## License
-
-This project is licensed under the MIT License.
